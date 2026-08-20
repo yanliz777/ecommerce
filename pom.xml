@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- ================================================================= -->
+	<!-- 1. PADRE: Hereda configuraciones base y gestión de versiones     -->
+	<!-- ================================================================= -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.5</version>
+		<relativePath/> <!-- Busca el parent en el repositorio central de Maven -->
+	</parent>
+
+	<!-- ================================================================= -->
+	<!-- 2. COORDENADAS DEL PROYECTO (GAV: GroupId, ArtifactId, Version)    -->
+	<!-- ================================================================= -->
+	<groupId>com.yf.ecommerce</groupId>
+	<artifactId>backend</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>backend</name>
+	<description>Backend para proyecto Ecommerce</description>
+
+	<!-- ================================================================= -->
+	<!-- 3. PROPIEDADES (<properties>): Variables globales centralizadas    -->
+	<!-- ¿Por qué aquí? Para no repetir versiones y facilitar actualizaciones -->
+	<!-- ================================================================= -->
+	<properties>
+		<java.version>17</java.version>
+		<!-- Versión de MapStruct para anotaciones y procesador -->
+		<version.mapstruct>1.6.3</version.mapstruct>
+		<!-- Versión del puente obligatorio entre Lombok y MapStruct -->
+		<version.lombok-mapstruct-binding>0.2.0</version.lombok-mapstruct-binding>
+	</properties>
+
+	<!-- ================================================================= -->
+	<!-- 4. DEPENDENCIAS (<dependencies>): Librerías que el código importa -->
+	<!-- ¿Por qué aquí? Son los .jar que tu código Java necesita en runtime/compile -->
+	<!-- ================================================================= -->
+	<dependencies>
+		<!-- Spring Data JPA: Para persistencia y repositorios -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- Spring Web: Para controladores REST y APIs -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- DevTools: Recarga automática en desarrollo -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- Driver JDBC de PostgreSQL: Para conectar con la base de datos -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- LOMBOK (Dependencia): Provee anotaciones como @Getter, @Setter, @Builder, @Data -->
+		<!-- Nota: La versión la gestiona el spring-boot-starter-parent -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- MAPSTRUCT (Dependencia): Provee anotaciones de mapeo como @Mapper, @Mapping -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${version.mapstruct}</version>
+		</dependency>
+
+		<!-- Spring Boot Starter Test: Para pruebas unitarias y de integración -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<!-- ================================================================= -->
+	<!-- 5. CONSTRUCCIÓN (<build>): Plugins y herramientas de compilación   -->
+	<!-- ================================================================= -->
+	<build>
+		<plugins>
+			<!-- Plugin de Spring Boot: Genera el JAR ejecutable con Tomcat embebido -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<!-- ============================================================= -->
+			<!-- PLUGIN DEL COMPILADOR (maven-compiler-plugin)                 -->
+			<!-- ¿Por qué aquí? Configura cómo javac procesa las anotaciones.  -->
+			<!-- ¡EL ORDEN DENTRO DE <annotationProcessorPaths> ES CRÍTICO!    -->
+			<!-- ============================================================= -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<annotationProcessorPaths>
+						<!-- =================================================== -->
+						<!-- 1º LOMBOK: Debe procesarse PRIMERO para generar     -->
+						<!--    getters, setters, constructores y builders en el -->
+						<!--    Árbol de Sintaxis (AST) en memoria del compilador.-->
+						<!-- =================================================== -->
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+
+						<!-- =================================================== -->
+						<!-- 2º BINDING: Puente obligatorio oficial. Hace que    -->
+						<!--    las modificaciones hechas por Lombok en el AST   -->
+						<!--    sean visibles para MapStruct sin colisiones.     -->
+						<!-- =================================================== -->
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>${version.lombok-mapstruct-binding}</version>
+						</path>
+
+						<!-- =================================================== -->
+						<!-- 3º MAPSTRUCT: Se ejecuta de TERCERO. Lee los        -->
+						<!--    getters/setters generados por Lombok en el paso  -->
+						<!--    1 y genera las clases *MapperImpl.java.          -->
+						<!-- =================================================== -->
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${version.mapstruct}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
