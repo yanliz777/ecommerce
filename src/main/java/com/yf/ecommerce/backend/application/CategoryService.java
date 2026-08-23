@@ -12,7 +12,7 @@ public class CategoryService {
     /*
     Inyección de dependencia:
     La clase declara sus dependencias como
-    final y las recibe servidas desde afuera por
+    final(iCategoryRepository) y las recibe servidas desde afuera por
     parámetro en el constructor.
      */
     public CategoryService(ICategoryRepository iCategoryRepository) {
