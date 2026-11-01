@@ -1,11 +1,16 @@
-package com.yf.ecommerce.backend.infrastructure.adapter;
+package com.yf.ecommerce.backend.infrastructure.adapter.impl;
 
 import com.yf.ecommerce.backend.domain.model.User;
 import com.yf.ecommerce.backend.domain.port.IUserRepository;
-import com.yf.ecommerce.backend.infrastructure.UserEntity;
+import com.yf.ecommerce.backend.infrastructure.adapter.interfaces.IUserCrudRepository;
+import com.yf.ecommerce.backend.infrastructure.entity.UserEntity;
 import com.yf.ecommerce.backend.infrastructure.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
+
+//Adaptador de salida:llamados por la aplicación para interactuar con bases de datos o servicios
+//externos.
+
 
 /*
 @Repository: clase que permite acceder a una BD.
@@ -19,6 +24,7 @@ public class UserCrudRepositoryImpl implements IUserRepository {
     private final IUserCrudRepository iUserCrudRepository;
     private final UserMapper userMapper;
 
+    //Constructor:
     public UserCrudRepositoryImpl(IUserCrudRepository iUserCrudRepository, UserMapper userMapper) {
         this.iUserCrudRepository = iUserCrudRepository;
         this.userMapper = userMapper;

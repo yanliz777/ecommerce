@@ -4,6 +4,8 @@ import com.yf.ecommerce.backend.application.UserService;
 import com.yf.ecommerce.backend.domain.model.User;
 import org.springframework.web.bind.annotation.*;
 
+//Adaptador de entrada.
+
 /*
 @RestController: Se usa cuando construyes una API REST desacoplada.
 No devuelve páginas HTML, sino datos crudos en formato JSON o XML.

@@ -1,4 +1,4 @@
-package com.yf.ecommerce.backend.infrastructure;
+package com.yf.ecommerce.backend.infrastructure.entity;
 
 import com.yf.ecommerce.backend.domain.model.UserType;
 import jakarta.persistence.*;
