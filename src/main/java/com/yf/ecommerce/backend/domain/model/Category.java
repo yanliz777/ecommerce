@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 /*
 Relacion: una categoria puede tener muchos productos.
  */
@@ -13,5 +15,7 @@ Relacion: una categoria puede tener muchos productos.
 public class Category {
     private Integer id;
     private String name;
+    private LocalDateTime dateCreated;
+    private LocalDateTime dateUpdate;
 
 }

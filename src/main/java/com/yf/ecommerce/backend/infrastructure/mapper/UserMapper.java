@@ -1,12 +1,13 @@
 package com.yf.ecommerce.backend.infrastructure.mapper;
 
 import com.yf.ecommerce.backend.domain.model.User;
-import com.yf.ecommerce.backend.infrastructure.UserEntity;
+import com.yf.ecommerce.backend.infrastructure.entity.UserEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+//para que el contenedor spring proporcione una intancia si l aquiero usar en otra clase
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
@@ -30,7 +31,7 @@ public interface UserMapper {
             }
     )
     /*
-    Converte una entidad(UserEntity) a
+    Convierte una entidad(UserEntity) a
     un objeto User.
      */
     User toUser(UserEntity userEntity);

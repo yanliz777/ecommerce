@@ -1,7 +1,8 @@
-package com.yf.ecommerce.backend.infrastructure.adapter;
+package com.yf.ecommerce.backend.infrastructure.adapter.impl;
 
 import com.yf.ecommerce.backend.domain.model.User;
 import com.yf.ecommerce.backend.domain.port.IUserRepository;
+import com.yf.ecommerce.backend.infrastructure.adapter.interfaces.IUserCrudRepository;
 import com.yf.ecommerce.backend.infrastructure.entity.UserEntity;
 import com.yf.ecommerce.backend.infrastructure.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
