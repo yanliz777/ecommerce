@@ -2,6 +2,8 @@ package com.yf.ecommerce.backend.infrastructure.rest;
 
 import com.yf.ecommerce.backend.application.UserService;
 import com.yf.ecommerce.backend.domain.model.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 //Adaptador de entrada.
@@ -34,8 +36,8 @@ public class UserController {
     nos está enviando información para crear o modificar algo.
      */
     @PostMapping
-    public User save(@RequestBody User user){
-        return userService.save(user);
+    public ResponseEntity<User> save(@RequestBody User user){
+        return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
     /*
@@ -47,8 +49,8 @@ public class UserController {
     http://localhost:8085/api/v1/users/4
      */
     @GetMapping("/{id}")
-    public User findById(@PathVariable Integer id){
-        return userService.findById(id);
+    public ResponseEntity<User> findById(@PathVariable Integer id){
+        return ResponseEntity.ok(userService.findById(id));
     }
 
 }

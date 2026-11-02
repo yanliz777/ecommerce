@@ -3,6 +3,8 @@ package com.yf.ecommerce.backend.infrastructure.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +18,8 @@ public class CategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @CreationTimestamp//Para guardar la fecha y hora cuando el usuario es creado.
     private LocalDateTime dateCreated;
+    @UpdateTimestamp//Para guardar la fecha y hora cuando el usuario es actualizado.
     private LocalDateTime dateUpdate;
 }
