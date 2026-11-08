@@ -21,5 +21,5 @@ public class CategoryEntity {
     @CreationTimestamp//Para guardar la fecha y hora cuando el usuario es creado.
     private LocalDateTime dateCreated;
     @UpdateTimestamp//Para guardar la fecha y hora cuando el usuario es actualizado.
-    private LocalDateTime dateUpdate;
+    private LocalDateTime dateUpdated;
 }

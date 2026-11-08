@@ -1,8 +1,10 @@
 package com.yf.ecommerce.backend.infrastructure.config;
 
 import com.yf.ecommerce.backend.application.CategoryService;
+import com.yf.ecommerce.backend.application.ProductService;
 import com.yf.ecommerce.backend.application.UserService;
 import com.yf.ecommerce.backend.domain.port.ICategoryRepository;
+import com.yf.ecommerce.backend.domain.port.IProductRepository;
 import com.yf.ecommerce.backend.domain.port.IUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,4 +37,9 @@ public class BeanConfiguration {
         return categoryService;
     }
 
+    @Bean
+    public ProductService productService(IProductRepository iProductRepository){
+        ProductService productService = new ProductService(iProductRepository);
+        return productService;
+    }
 }

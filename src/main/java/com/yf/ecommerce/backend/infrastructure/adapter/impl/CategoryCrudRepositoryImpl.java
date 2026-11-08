@@ -30,12 +30,16 @@ public class CategoryCrudRepositoryImpl implements ICategoryRepository {
     @Override
     public Category findById(Integer id) {
         return categoryMapper.toCategory(icategoryCrudRepository.findById(id).orElseThrow(
-                ()-> new RuntimeException("La categoria con id: " + id +" No existe el objeto")
+                ()-> new RuntimeException("La categoria con id: " + id +" No existe")
         ));
     }
 
     @Override
     public void deletById(Integer id) {
+        icategoryCrudRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("La categoria con id: " + id +" No existe el objeto")
+        );
+
         icategoryCrudRepository.deleteById(id);
     }
 }

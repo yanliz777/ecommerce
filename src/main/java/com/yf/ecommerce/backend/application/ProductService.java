@@ -19,7 +19,8 @@ public class ProductService {
     public Iterable<Product> findAll(){
         return iProductRepository.findAll();
     }
-    Product findById(Integer id){
+
+    public Product findById(Integer id){
         return iProductRepository.findById(id);
     }
 

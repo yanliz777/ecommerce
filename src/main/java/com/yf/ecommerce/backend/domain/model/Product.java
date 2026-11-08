@@ -3,7 +3,6 @@ package com.yf.ecommerce.backend.domain.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -18,9 +17,10 @@ public class Product {
     private String urlImagen;
     private BigDecimal price;
     private LocalDateTime dateCreated;
-    private LocalDateTime dateUpdate;
+    private LocalDateTime dateUpdated;
     //relaciona al usuario que lo subio(ADMIN):
     private Integer userId;
     //una categoria puede tener muchos productos(llave foranea):
     private Integer categoryId;
+
 }
