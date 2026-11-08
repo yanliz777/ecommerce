@@ -15,7 +15,7 @@ public interface CategoryMapper {
                     @Mapping(source = "id", target = "id"),
                     @Mapping(source = "name", target = "name"),
                     @Mapping(source = "dateCreated", target = "dateCreated"),
-                    @Mapping(source = "dateUpdate", target = "dateUpdate")
+                    @Mapping(source = "dateUpdated", target = "dateUpdated")
             }
     )
 

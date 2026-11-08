@@ -16,6 +16,6 @@ public class Category {
     private Integer id;
     private String name;
     private LocalDateTime dateCreated;
-    private LocalDateTime dateUpdate;
+    private LocalDateTime dateUpdated;
 
 }
